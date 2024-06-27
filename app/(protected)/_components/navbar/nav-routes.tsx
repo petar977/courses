@@ -4,6 +4,8 @@ import { BarChart, Compass, Layout, List } from "lucide-react";
 import { NavItem } from "./nav-item";
 import { usePathname } from "next/navigation";
 import { SearchInput } from "./search-input";
+import { SwitchMode } from "./switch-mode";
+import { UserButton } from "@/components/auth/user-button";
 
 const guestRoutes = [
     {
@@ -50,8 +52,9 @@ export const NavRoutes = () => {
                     <NavItem key={route.href} icon={route.icon} label={route.label} href={route.href}/>
                 ))
             }
-            
         </div>
+        <SwitchMode />
+            {/* <UserButton /> */}
         </>
     )
 }

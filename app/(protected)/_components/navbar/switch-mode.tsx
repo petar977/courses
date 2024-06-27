@@ -9,7 +9,7 @@ export const SwitchMode = () => {
     const pathname = usePathname();
 
     const isDevPage = pathname?.startsWith("/dev");
-    const isGuestPage = pathname?.includes("/guest");
+    const isGuestPage = pathname?.includes("/courses");
 
     return (
         <div className="flex gap-x-2 ml-auto">
