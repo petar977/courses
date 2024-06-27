@@ -31,16 +31,17 @@ model Roles {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
-  password      String?
-  image         String?
-  accounts      Account[]
-  role          UserRoles[]
+  id                String    @id @default(cuid())
+  name              String?
+  email             String?   @unique
+  emailVerified     DateTime? @map("email_verified")
+  password          String?
+  image             String?
+  accounts          Account[]
+  role              UserRoles[]
   isTwoFactorEnabled Boolean @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
+  courses           Course[]
 
   @@map("Users")
 }
@@ -98,6 +99,98 @@ model TwoFactorConfirmation {
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique ([userId])
+}
+
+model Course {
+  id          String  @id @default(uuid())
+  title       String  @db.Text
+  description String? @db.Text
+  ImageUrl    String? @db.Text
+  price       Float?
+  isPublished Boolean @default(false)
+  userId      String
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  attachments Attachment[]
+  chapters    Chapter[]
+  purchases     Purchase[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique ([userId, id])
+}
+
+model Category {
+  id          String     @id @default(uuid())
+  name        String
+  courses     Course[]
+}
+
+model Attachment {
+  id          String     @id @default(uuid())
+  name        String
+  url         String     @db.Text
+
+  courseId    String
+  course      Course     @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([courseId])
+}
+
+model Chapter {
+  id            String    @id @default(uuid())
+  title         String
+  description   String?   @db.Text
+  videoUrl      String?   @db.Text
+  position      Int
+  isPublished   Boolean   @default(false)
+  isFree        Boolean   @default(false)
+
+  courseId      String    
+  course        Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  userProgress  UserProgress[]
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([courseId])
+}
+
+model UserProgress {
+  id          String    @id @default(uuid())
+  userId      String
+
+  chapterId   String
+  chapter     Chapter   @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  isCompleted Boolean   @default(false)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([chapterId])
+  @@unique([userId, chapterId])
+}
+
+model Purchase {
+  id        String  @id @default(uuid())
+  userId    String
+
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([courseId])
 }
 
 

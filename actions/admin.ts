@@ -1,5 +1,6 @@
 "use server"
 
+import { auth } from "@/auth";
 import { currentUserRole } from "@/lib/auth"
 
 export const admin = async () =>{
@@ -9,4 +10,9 @@ export const admin = async () =>{
         return { success: "Allowed!"};     
     }
     return { error: "Forbidden!"};
+}
+
+export const userS = async () => {
+    const session = await auth();
+    return session?.user;
 }

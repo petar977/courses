@@ -8,8 +8,6 @@ import { currentUser } from "@/lib/auth";
 import { generateVerificationToken } from "@/lib/tokens";
 import { sendVerificationEmail } from "@/lib/mail";
 import bcrypt from "bcryptjs";
-import { connect } from "http2";
-import { parse } from "path";
 
 export const settings = async (values: z.infer<typeof SettingsSchema>) => {
     const user = await currentUser();

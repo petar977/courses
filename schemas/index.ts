@@ -1,5 +1,4 @@
 import * as z from "zod";
-import { UserRoles } from "@prisma/client";
 
 export const ResetSchema = z.object({
     email: z.string().email({

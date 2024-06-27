@@ -149,7 +149,8 @@ export function LoginForm() {
           <Button
             disabled={isPending}
             type="submit"
-            className="w-full">
+            className="w-full"
+            variant="primary">
             {showTwoFactor ? "Confirm" : "Login"}
           </Button>
         </form>

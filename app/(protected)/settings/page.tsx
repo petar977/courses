@@ -56,34 +56,35 @@ const SettingsPage = () => {
 
     }
     return (
-        <Card className="w-[600px]">
-            <CardHeader>
-                <p className="text-2xl font-semibold text-center">
-                    ⚙ Settings
-                </p>
-            </CardHeader>
-            <CardContent className="">
-                <Form {...form}>
-                    <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-                        <div className="space-y-4">
-                            <FormField
-                                control={form.control}
-                                name="name"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Name</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                {...field}
-                                                placeholder="Petar Petrovic"
-                                                disabled={isPending}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            {user?.isOAuth === false && (
+        <div className="m-auto">
+            <Card className="w-[600px]">
+                <CardHeader>
+                    <p className="text-2xl font-semibold text-center">
+                        ⚙ Settings
+                    </p>
+                </CardHeader>
+                <CardContent className="">
+                    <Form {...form}>
+                        <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+                            <div className="space-y-4">
+                                <FormField
+                                    control={form.control}
+                                    name="name"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Name</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    {...field}
+                                                    placeholder="Petar Petrovic"
+                                                    disabled={isPending}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                {user?.isOAuth === false && (
                                 <>
                                     <FormField
                                         control={form.control}
@@ -114,6 +115,7 @@ const SettingsPage = () => {
                                                         {...field}
                                                         placeholder="******"
                                                         disabled={isPending}
+                                                        type="password"
                                                     />
                                                 </FormControl>
                                                 <FormMessage />
@@ -131,6 +133,7 @@ const SettingsPage = () => {
                                                         {...field}
                                                         placeholder="******"
                                                         disabled={isPending}
+                                                        type="password"
                                                     />
                                                 </FormControl>
                                                 <FormMessage />
@@ -138,69 +141,71 @@ const SettingsPage = () => {
                                         )}
                                     />
                                 </>
-                            )}
-                            <FormField
-                                control={form.control}
-                                name="roles"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Role</FormLabel>
-                                        <Select
-                                        disabled={isPending}
-                                        onValueChange={field.onChange}
-                                        defaultValue={field.value?.toString()}   
-                                        >
-                                            <FormControl>
-                                                <SelectTrigger>
-                                                    <SelectValue placeholder="Select a role" />
-                                                    <SelectContent>
-                                                        <SelectItem value="1">
-                                                            Admin
-                                                        </SelectItem>
-                                                        <SelectItem value="2">
-                                                            User
-                                                        </SelectItem>
-                                                    </SelectContent>
-                                                </SelectTrigger>
-                                            </FormControl>
-
-                                        </Select>
-                                    </FormItem>
                                 )}
-                            />
-                            {user?.isOAuth === false && (
                                 <FormField
                                     control={form.control}
-                                    name="isTwoFactorEnabled"
+                                    name="roles"
                                     render={({ field }) => (
-                                        <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
-                                            <div className="space-y-0.5">
-                                                <FormLabel>Two Factor Authentication</FormLabel>
-                                                <FormDescription>
-                                                    Enable two factor authentication for your account
-                                                </FormDescription>
-                                            </div>
-                                            <FormControl>
-                                                <Switch
-                                                    disabled={isPending}
-                                                    checked={field.value}
-                                                    onCheckedChange={field.onChange}
-                                                />
-                                            </FormControl>
+                                        <FormItem>
+                                            <FormLabel>Role</FormLabel>
+                                            <Select
+                                                disabled={isPending}
+                                                onValueChange={field.onChange}
+                                                defaultValue={field.value?.toString()}
+                                            >
+                                                <FormControl>
+                                                    <SelectTrigger>
+                                                        <SelectValue placeholder="Select a role" />
+                                                        <SelectContent>
+                                                            <SelectItem value="1">
+                                                                Admin
+                                                            </SelectItem>
+                                                            <SelectItem value="2">
+                                                                User
+                                                            </SelectItem>
+                                                        </SelectContent>
+                                                    </SelectTrigger>
+                                                </FormControl>
+
+                                            </Select>
                                         </FormItem>
                                     )}
                                 />
-                            )}
-                        </div>
-                        <FormSuccess message={success} />
-                        <FormError message={error} />
-                        <Button type="submit" disabled={isPending}>
-                            Save
-                        </Button>
-                    </form>
-                </Form>
-            </CardContent>
-        </Card>
+                                {user?.isOAuth === false && (
+                                    <FormField
+                                        control={form.control}
+                                        name="isTwoFactorEnabled"
+                                        render={({ field }) => (
+                                            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                                                <div className="space-y-0.5">
+                                                    <FormLabel>Two Factor Authentication</FormLabel>
+                                                    <FormDescription>
+                                                        Enable two factor authentication for your account
+                                                    </FormDescription>
+                                                </div>
+                                                <FormControl>
+                                                    <Switch
+                                                        disabled={isPending}
+                                                        checked={field.value}
+                                                        onCheckedChange={field.onChange}
+
+                                                    />
+                                                </FormControl>
+                                            </FormItem>
+                                        )}
+                                    />
+                                )}
+                            </div>
+                            <FormSuccess message={success} />
+                            <FormError message={error} />
+                            <Button type="submit" disabled={isPending}>
+                                Save
+                            </Button>
+                        </form>
+                    </Form>
+                </CardContent>
+            </Card>
+        </div>
     );
 }
 
