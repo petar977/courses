@@ -1,4 +1,4 @@
-
+"use client"
 import { FaUser } from "react-icons/fa";
 import { ExitIcon, GearIcon } from "@radix-ui/react-icons";
 import {
@@ -13,16 +13,15 @@ import {
     AvatarFallback,
     AvatarImage
 } from "@/components/ui/avatar";
-//import { useCurrentUser } from "@/hooks/use-current-user";
+import { useCurrentUser } from "@/hooks/use-current-user";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { LoginButton } from "./login-button";
 import { Button } from "../ui/button";
-import { auth } from "@/auth";
 import Link from "next/link";
 
-export const UserButton = async () => {
-    const session = await auth();
-    const user = session?.user;
+export const UserButton = () => {
+    const session = useCurrentUser();
+    const user = session;
 
     return (
         <div className="flex items-center justify-end gap-x-2 ml-4">
@@ -31,7 +30,7 @@ export const UserButton = async () => {
                     <Button variant="primary" size="sm">Login</Button>
                 </LoginButton>
             )}
-            {!!user && (
+            {user && (
                 <DropdownMenu>
                     <DropdownMenuTrigger >
                         <Avatar>
@@ -48,12 +47,12 @@ export const UserButton = async () => {
                                 Settings
                             </DropdownMenuItem>
                         </Link>
-                        <LogoutButton>
+                            <LogoutButton>
                             <DropdownMenuItem>
                                 <ExitIcon className="h-4 w-4 mr-2" />
                                 Logout
                             </DropdownMenuItem>
-                        </LogoutButton>
+                            </LogoutButton>
                     </DropdownMenuContent>
                 </DropdownMenu>
             )}

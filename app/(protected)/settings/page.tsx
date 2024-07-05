@@ -56,7 +56,7 @@ const SettingsPage = () => {
 
     }
     return (
-        <div className="m-auto">
+        <div className="flex justify-center mt-10 mx-5">
             <Card className="w-[600px]">
                 <CardHeader>
                     <p className="text-2xl font-semibold text-center">

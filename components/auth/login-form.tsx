@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 import { useState, useTransition } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -29,6 +29,7 @@ export function LoginForm() {
   const [isPending, startTransition] = useTransition();
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const searchParams = useSearchParams();
+  const router = useRouter();
   const callbackUrl = searchParams.get("callbackUrl")
   const urlError = searchParams.get("error") === "OAuthAccountNotLinked"
     ? "Email already in use with different provider!"
@@ -59,6 +60,7 @@ export function LoginForm() {
           if (data?.twoFactor) {
             setShowTwoFactor(true);
           }
+          location.reload()
 
         }).catch(() => setError("Something went wrong!"));
     });

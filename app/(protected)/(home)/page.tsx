@@ -1,19 +1,31 @@
+import { getDashboardCourses } from "@/actions/get-dashboard-courses";
+import { auth } from "@/auth";
+import { CoursesList } from "@/components/courses-list";
+import { Clock } from "lucide-react";
+import { InfoCard } from "./_components/info-card";
 
 
-export default function Home() {
-  return (
-    <main className="flex h-full items-center
-    justify-center w-full
-    bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400 to-blue-800">
-      <div className="space-y-6 text-center">
-        <h1 className="text-6xl font-semibold text-white drop-shadow-md">
-          Purchase Order Management
-        </h1>
-        <p className="text-white text-lg">Welcome to purchase order pageasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfas</p>
+export default async function Dashboard() {
+const user = await auth();
+  
+  const userId = user?.user.id!;
+
+  const { completedCourses } = await getDashboardCourses(userId);
+
+  
+  return (   
+    <div className="p-6 space-y-4 ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <InfoCard 
+          icon={Clock}
+          label="In Progress"
+          numberOfItems={completedCourses}
+        />
         <div>
           
         </div>
       </div>
-    </main>
+      <CoursesList items={[...completedCourses]} />
+    </div>
   );
 }

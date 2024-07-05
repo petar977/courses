@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import { getUserById } from "@/data/user";
 import { db } from "@/lib/db";
+import { isAdmin } from "@/lib/owner-mode";
 import { NextResponse } from "next/server";
 
 export async function POST(req:Request) {
@@ -9,7 +10,7 @@ export async function POST(req:Request) {
         const { title } = await req.json();
         const existingUser = await getUserById(user?.user.id);
 
-        if (!existingUser) {
+        if (!existingUser || !await isAdmin(existingUser.id)) {
             return new NextResponse("Unauthorized!", { status: 401 });
         }
         
