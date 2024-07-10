@@ -13,14 +13,14 @@ interface VideoPlayerProps {
   chapterId: string;
   isLocked: boolean;
   title: string;
-  completeOnEnd: boolean;
+  //completeOnEnd: boolean;
   playbackId: string;
 }
 
 export const VideoPlayer = ({
   playbackId,
   chapterId,
-  completeOnEnd,
+  //completeOnEnd,
   courseId,
   isLocked,
   title,
@@ -43,7 +43,7 @@ export const VideoPlayer = ({
       {!isLocked && (
         <video
           controls
-          className={cn(!isReady && "hidden")}
+          className={cn("aspect-video", !isReady && "hidden")}
           onCanPlay={() => setIsReady(true)}
           onEnded={() => {}}
           autoPlay

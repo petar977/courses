@@ -42,7 +42,7 @@ export const getDashboardCourses = async (
         const progress = await getProgress(userId, course.id);
         course["progress"] = progress;
     }
-    const completedCourses = courses.filter((course) => course.progress === 100)
+    const completedCourses = courses.filter((course) => course.progress === 0)
   
     return {completedCourses};
 } catch (error) {

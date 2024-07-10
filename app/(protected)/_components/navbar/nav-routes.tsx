@@ -3,7 +3,6 @@
 import { BarChart, Compass, Layout, List } from "lucide-react";
 import { NavItem } from "./nav-item";
 import { usePathname } from "next/navigation";
-import { SearchInput } from "./search-input";
 import { SwitchMode } from "./switch-mode";
 import { UserButton } from "@/components/auth/user-button";
 
@@ -39,8 +38,8 @@ export const NavRoutes = () => {
   const routes = isDevMode ? devRoutes : guestRoutes;
 
   return (
-    <>
-      <div className="flex gap-x-2">
+    <div className="flex items-center w-full">
+      <div className="flex gap-x-2 justify-center w-full">
         {routes.map((route) => (
           <NavItem
             key={route.href}
@@ -51,11 +50,9 @@ export const NavRoutes = () => {
         ))}
       </div>
       <div className="flex items-center justify-end">
-
-      
-      <SwitchMode />
-      <UserButton />
+        <SwitchMode />
+        <UserButton />
       </div>
-    </>
+    </div>
   );
 };

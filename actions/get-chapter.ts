@@ -58,7 +58,7 @@ export const getChapter = async ({
             }
         });
 
-        return { chapter, course, attachments, userProgress}
+        return { chapter, course, attachments, userProgress, purchase}
 
     } catch (error) {
         console.log("[GET_CHAPTER]", error);

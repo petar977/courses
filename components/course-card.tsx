@@ -21,6 +21,7 @@ export const CourseCard = ({id,category,chaptersLenght,imageUrl,price,progress,t
                 <div className="relative w-full aspect-video rounded-md overflow-hidden">
                     <Image 
                         fill
+                        sizes="fill"
                         className="object-cover"
                         alt={title}
                         src={`/${imageUrl}`}

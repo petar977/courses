@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 import { CourseSideBar } from "./_components/course-sidebar";
 import { CourseNavbar } from "./_components/course-navbar";
 
-
 const CourseLayout = async ({ children, params }: {children: React.ReactNode, params:{ courseId: string;}}) => {
     
     const user = await auth();
@@ -56,9 +55,10 @@ const CourseLayout = async ({ children, params }: {children: React.ReactNode, pa
                 course={course}
                 progressCount={progressCount}
             />
+            
         </div>
         <main className="md:pl-80 pt-[80px] h-full">
-        {children}
+            {children}
         </main>
         
       </div>

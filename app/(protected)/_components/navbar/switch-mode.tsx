@@ -14,7 +14,7 @@ export const SwitchMode = () => {
     const isGuestPage = pathname?.includes("/courses");
 
     return (
-        <div className="flex gap-x-2 ">
+        <div className="flex gap-x-2">
             {isDevPage || isGuestPage ? (
                 <Link href="/">
                     <Button variant="outline">

@@ -12,18 +12,14 @@ const user = await auth();
 
   const { completedCourses } = await getDashboardCourses(userId);
 
-  
-  return (   
+  return (
     <div className="p-6 space-y-4 ">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <InfoCard 
+        <InfoCard
           icon={Clock}
-          label="In Progress"
-          numberOfItems={completedCourses}
+          label="Your Courses"
+          numberOfItems={completedCourses.length}
         />
-        <div>
-          
-        </div>
       </div>
       <CoursesList items={[...completedCourses]} />
     </div>

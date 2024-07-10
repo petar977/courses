@@ -27,7 +27,7 @@ export const UserButton = () => {
         <div className="flex items-center justify-end gap-x-2 ml-4">
             {!user && (
                 <LoginButton mode="modal" asChild>
-                    <Button variant="primary" size="sm">Login</Button>
+                    <Button variant="default" size="sm">Login</Button>
                 </LoginButton>
             )}
             {user && (

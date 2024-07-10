@@ -38,7 +38,7 @@ model User {
   password          String?
   image             String?
   accounts          Account[]
-  role              UserRoles[]
+  role              UserRoles[] 
   isTwoFactorEnabled Boolean @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
   courses           Course[]
@@ -192,6 +192,15 @@ model Purchase {
 
   @@unique ([userId, courseId])
   @@index([courseId])
+}
+
+model StripeCustomer {
+  id                 String  @id @default(uuid())
+  userId             String  @unique
+  stripeCustomerId   String  @unique
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 

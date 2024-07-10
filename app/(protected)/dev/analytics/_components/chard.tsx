@@ -17,13 +17,13 @@ export const Chart = ({ data }: ChardProps) => {
                 <BarChart data={data}>
                     <XAxis 
                     dataKey="name"
-                    stroke="#888888"
+                    stroke="white"
                     fontSize={12}
                     tickLine={false}
                     axisLine={false}
                     />
                     <YAxis 
-                    stroke="#888888"
+                    stroke="white"
                     fontSize={12}
                     tickLine={false}
                     axisLine={false}

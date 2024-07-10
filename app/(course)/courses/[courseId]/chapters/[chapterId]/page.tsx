@@ -52,7 +52,7 @@ const ChapterIdPage = async ({
             courseId={params.courseId}
             title={chapter.title}
             isLocked={isLocked}
-            completeOnEnd={completeOnEnd}
+            //completeOnEnd={completeOnEnd}
             playbackId={chapter.videoUrl!}
           />
         </div>
